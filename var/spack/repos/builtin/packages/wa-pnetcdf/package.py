@@ -30,14 +30,14 @@ class WaPnetcdf(AutotoolsPackage):
     """
 
     homepage = "https://parallel-netcdf.github.io/"
-    url = "https://github.com/WAAutoMaton/parallel-netcdf/archive/refs/tags/v1.12.3.2.tar.gz"
+    url = "https://parallel-netcdf.github.io/Release/pnetcdf-1.12.3.tar.gz"
 
     maintainers("WAAutoMaton")
 
     # FIXME: Add the SPDX identifier of the project's license below.
     #license("UNKNOWN")
 
-    version("1.12.3", sha256="10f95a0246a06c179e333b54628fdf4717545e00e737b7c34c47d0df9daccc85")
+    version("1.12.3", sha256="439e359d09bb93d0e58a6e3f928f39c2eae965b6c97f64e67cd42220d6034f77")
     
     variant("mpi-path",values=str,default="USE-DEFAULT")
     variant("with-nvhpc",values=bool,default=False)
@@ -55,8 +55,8 @@ class WaPnetcdf(AutotoolsPackage):
         return args
 
     def setup_build_environment(self, env):
-        env.set('C_INCLUDE_PATH', self.spec['nvhpc'].prefix+'/Linux_x86_64/23.9/compilers/include/')
-        env.set('CPLUS_INCLUDE_PATH', self.spec['nvhpc'].prefix+'/Linux_x86_64/23.9/compilers/include/')
+        #env.set('C_INCLUDE_PATH', self.spec['nvhpc'].prefix+'/Linux_x86_64/23.9/compilers/include/')
+        #env.set('CPLUS_INCLUDE_PATH', self.spec['nvhpc'].prefix+'/Linux_x86_64/23.9/compilers/include/')
         env.set('MPICC','mpicc')
         env.set('MPICXX','mpicxx')
         env.set('MPIF77','mpif77')
