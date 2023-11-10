@@ -40,7 +40,7 @@ class WaPnetcdf(AutotoolsPackage):
     version("1.12.3", sha256="439e359d09bb93d0e58a6e3f928f39c2eae965b6c97f64e67cd42220d6034f77")
     
     variant("mpi-path",values=str,default="USE-DEFAULT")
-    variant("with-nvhpc",values=bool,default=False)
+    variant("with-nvhpc",default=False)
 
     depends_on("mpi")
     depends_on("nvhpc",when="+with-nvhpc")

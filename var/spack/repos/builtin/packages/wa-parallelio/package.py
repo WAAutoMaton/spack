@@ -134,4 +134,6 @@ class WaParallelio(CMakePackage):
                 valid_values += ",pnetcdf"
         env.set("PIO_TYPENAME_VALID_VALUES", valid_values)
         env.set("PIO",self.prefix)
+        env.prepend_path("LD_LIBRARY_PATH",self.prefix.lib)
+        env.prepend_path("LIBRARY_PATH",self.prefix.lib)
 
