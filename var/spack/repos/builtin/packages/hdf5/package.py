@@ -569,7 +569,17 @@ class Hdf5(CMakePackage):
         # According to related github posts and problems running test_install
         # as a stand-alone test, it appears the lib path must be added to
         # LD_LIBRARY_PATH.
+        env.append_path("LIBRARY_PATH", self.prefix.lib)
         env.append_path("LD_LIBRARY_PATH", self.prefix.lib)
+        env.append_path("C_INCLUDE_PATH",self.prefix.include)
+        env.append_path("CPLUS_INCLUDE_PATH",self.prefix.include)
+
+    def setup_dependent_build_environment(self, env, dependent_spec):
+        env.append_path("LIBRARY_PATH", self.prefix.lib)
+        env.append_path("LD_LIBRARY_PATH", self.prefix.lib)
+        env.append_path("C_INCLUDE_PATH",self.prefix.include)
+        env.append_path("CPLUS_INCLUDE_PATH",self.prefix.include)
+
 
     @run_before("cmake")
     def fortran_check(self):

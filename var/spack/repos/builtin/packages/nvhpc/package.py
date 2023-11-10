@@ -447,7 +447,15 @@ class Nvhpc(Package):
                 )
             )
             env.prepend_path("PATH", mpi_prefix.bin)
+            env.prepend_path("LIBRARY_PATH", mpi_prefix.lib)
             env.prepend_path("LD_LIBRARY_PATH", mpi_prefix.lib)
+            env.prepend_path('C_INCLUDE_PATH', mpi_prefix.include)
+            env.prepend_path('CPLUS_INCLUDE_PATH', mpi_prefix.include)
+            env.set('MPICC','mpicc')
+            env.set('MPICXX','mpicxx')
+            env.set('MPIF77','mpif77')
+            env.set('MPIF90','mpif90')
+            env.set('MPIFORT','mpifort')
 
     def setup_dependent_build_environment(self, env, dependent_spec):
         prefix = Prefix(
@@ -468,7 +476,16 @@ class Nvhpc(Package):
                 )
             )
 
+            env.prepend_path("PATH", mpi_prefix.bin)
+            env.prepend_path("LIBRARY_PATH", mpi_prefix.lib)
             env.prepend_path("LD_LIBRARY_PATH", mpi_prefix.lib)
+            env.prepend_path('C_INCLUDE_PATH', mpi_prefix.include)
+            env.prepend_path('CPLUS_INCLUDE_PATH', mpi_prefix.include)
+            env.set('MPICC','mpicc')
+            env.set('MPICXX','mpicxx')
+            env.set('MPIF77','mpif77')
+            env.set('MPIF90','mpif90')
+            env.set('MPIFORT','mpifort')
 
     def setup_dependent_package(self, module, dependent_spec):
         if "+mpi" in self.spec or self.provides("mpi"):

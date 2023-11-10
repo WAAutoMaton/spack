@@ -44,6 +44,7 @@ class WaParallelio(CMakePackage):
     version("2.5.4", sha256="e51dc71683da808a714deddc1a80c2650ce847110383e42f1710f3ba567e7a65")
     version("2.5.3", sha256="205a0a128fd5262700efc230b3380dc5ab10e74bc5d273ae05db76c9d95487ca")
     version("2.5.2", sha256="935bc120ef3bf4fe09fb8bfdf788d05fb201a125d7346bf6b09e27ac3b5f345c")
+    version("2.4.4", sha256="bd495419049d909e876834b8036375ac721dd44b844f9af11d1cba96347011a5")
 
     variant("pnetcdf", default=False, description="enable pnetcdf")
     variant("timing", default=False, description="enable GPTL timing")
@@ -66,10 +67,11 @@ class WaParallelio(CMakePackage):
     depends_on("cmake@3.7:", type="build")
     depends_on("mpi", when="+mpi")
     depends_on("mpi-serial", when="~mpi")
-    depends_on("netcdf-c +mpi", type="link", when="+mpi")
-    depends_on("netcdf-c ~mpi", type="link", when="~mpi")
+    depends_on("netcdf-c +mpi~szip", type="link", when="+mpi")
+    depends_on("netcdf-c ~mpi~szip", type="link", when="~mpi")
     depends_on("netcdf-fortran", type="link", when="+fortran")
     depends_on("wa-pnetcdf +with-nvhpc", type="link", when="+pnetcdf")
+    depends_on("nvhpc")
 
     resource(name="genf90", git="https://github.com/PARALLELIO/genf90.git", tag="genf90_200608")
 
@@ -131,4 +133,5 @@ class WaParallelio(CMakePackage):
             if self.spec.satisfies("+pnetcdf"):
                 valid_values += ",pnetcdf"
         env.set("PIO_TYPENAME_VALID_VALUES", valid_values)
+        env.set("PIO",self.prefix)
 

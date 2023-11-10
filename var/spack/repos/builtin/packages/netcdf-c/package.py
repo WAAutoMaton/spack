@@ -522,3 +522,18 @@ class AutotoolsBuilder(BaseBuilder, autotools.AutotoolsBuilder):
     def check(self):
         # h5_test fails when run in parallel
         make("check", parallel=False)
+
+    def setup_run_environment(self, env):
+        # According to related github posts and problems running test_install
+        # as a stand-alone test, it appears the lib path must be added to
+        # LD_LIBRARY_PATH.
+        env.append_path("LIBRARY_PATH", self.prefix.lib)
+        env.append_path("LD_LIBRARY_PATH", self.prefix.lib)
+        env.append_path("C_INCLUDE_PATH",self.prefix.include)
+        env.append_path("CPLUS_INCLUDE_PATH",self.prefix.include)
+
+    def setup_dependent_build_environment(self, env, dependent_spec):
+        env.append_path("LIBRARY_PATH", self.prefix.lib)
+        env.append_path("LD_LIBRARY_PATH", self.prefix.lib)
+        env.append_path("C_INCLUDE_PATH",self.prefix.include)
+        env.append_path("CPLUS_INCLUDE_PATH",self.prefix.include)
