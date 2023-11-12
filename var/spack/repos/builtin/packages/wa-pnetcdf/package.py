@@ -65,6 +65,17 @@ class WaPnetcdf(AutotoolsPackage):
         env.set('MPIFORT','mpifort')
 
     def setup_run_environment(self, env):
+        env.prepend_path('LIBRARY_PATH', self.prefix.lib)
         env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
         env.prepend_path('CPATH', self.prefix.include)
         env.set('PNETCDF',self.prefix)
+        env.prepend_path('C_INCLUDE_PATH', self.prefix.include)
+        env.prepend_path('CPLUS_INCLUDE_PATH', self.prefix.include)
+
+    def setup_dependent_build_environment(self, env, dependent_spec):
+        env.prepend_path('LIBRARY_PATH', self.prefix.lib)
+        env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
+        env.prepend_path('CPATH', self.prefix.include)
+        env.set('PNETCDF',self.prefix)
+        env.prepend_path('C_INCLUDE_PATH', self.prefix.include)
+        env.prepend_path('CPLUS_INCLUDE_PATH', self.prefix.include)
