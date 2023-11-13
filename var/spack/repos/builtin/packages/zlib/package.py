@@ -67,6 +67,19 @@ class Zlib(MakefilePackage, Package):
         shared = "+shared" in self.spec
         return find_libraries(["libz"], root=self.prefix, recursive=True, shared=shared)
 
+    def setup_run_environment(self, env):
+        env.prepend_path('LIBRARY_PATH', self.prefix.lib)
+        env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
+        env.prepend_path('CPATH', self.prefix.include)
+        env.prepend_path('C_INCLUDE_PATH', self.prefix.include)
+        env.prepend_path('CPLUS_INCLUDE_PATH', self.prefix.include)
+
+    def setup_dependent_build_environment(self, env, dependent_spec):
+        env.prepend_path('LIBRARY_PATH', self.prefix.lib)
+        env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
+        env.prepend_path('CPATH', self.prefix.include)
+        env.prepend_path('C_INCLUDE_PATH', self.prefix.include)
+        env.prepend_path('CPLUS_INCLUDE_PATH', self.prefix.include)
 
 class SetupEnvironment:
     def setup_build_environment(self, env):
