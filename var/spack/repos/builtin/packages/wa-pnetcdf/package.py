@@ -44,11 +44,16 @@ class WaPnetcdf(AutotoolsPackage):
 
     depends_on("mpi")
     depends_on("nvhpc",when="+with-nvhpc")
+    depends_on("zlib")
+    depends_on("autoconf", type="build")
+    depends_on("automake", type="build")
+    depends_on("libtool",  type="build")
+    depends_on("m4")
 
     def configure_args(self):
         nvhpc = bool(self.spec.variants['with-nvhpc'].value)
         if nvhpc:
-            mpi_path = self.spec['nvhpc'].prefix+'/Linux_x86_64/20.7/comm_libs/mpi/bin/'
+            mpi_path = self.spec['nvhpc'].prefix+'/Linux_x86_64/23.9/comm_libs/mpi/bin/'
         else:
             mpi_path = self.spec['mpi'].prefix
         print(mpi_path)
